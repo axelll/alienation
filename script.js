@@ -29,7 +29,7 @@ function fillValueTable() {
     // Генерация колонок для каждой минуты от 9 до 12
     for (let minute = 9; minute <= 12; minute++) {
         const minuteColumn = document.createElement('div');
-        minuteColumn.className = 'column';
+        minuteColumn.className = 'column minute-column';
         const header = document.createElement('div');
         header.className = 'header';
         header.textContent = `${minute} minutes`;
