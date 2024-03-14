@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('valueTable');
+
     // Очищаем контейнер
     container.innerHTML = '';
 
@@ -18,8 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let second = 0; second < 60; second += 10) {
             const valueDiv = document.createElement('div');
             valueDiv.className = 'value';
-            // Здесь должен быть ваш расчет или просто пример значения
-            valueDiv.textContent = `${second}s: 19...00`; // Пример текста
+            const totalSeconds = (minute * 60) + second;
+            const calculatedValue = -60 * totalSeconds + 2000000;
+            // Формируем окончательное значение с учетом формата 19XXX00
+            const displayValue = `19${(calculatedValue - 1900000).toString().padStart(4, '0')}`;
+            valueDiv.textContent = `${second}s: ${displayValue}`;
             minuteColumn.appendChild(valueDiv);
         }
     }
