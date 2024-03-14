@@ -2,12 +2,17 @@ body, html {
     margin: 0;
     padding: 20px;
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Светлый фон для всей страницы */
 }
 
 #app {
-    max-width: 800px;
+    max-width: 960px;
     margin: auto;
     text-align: center;
+}
+
+.input-group {
+    margin: 20px 0;
 }
 
 .input-group span {
@@ -22,55 +27,61 @@ input, button {
 
 button {
     cursor: pointer;
+    background-color: #0056b3; /* Темно-синий фон для кнопки */
+    color: white; /* Белый текст для кнопки */
+    border: none; /* Убираем границу кнопки */
+    border-radius: 5px; /* Скругление углов кнопки */
+    padding: 10px 20px; /* Паддинги для кнопки */
+    font-size: 16px; /* Размер шрифта для кнопки */
+    transition: background-color 0.3s; /* Анимация для кнопки */
 }
 
-#valueTable {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки для 4 минут */
-    gap: 20px;
+button:hover {
+    background-color: #003875; /* Цвет кнопки при наведении */
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #28a745; /* Зеленый цвет текста для результата */
+}
+
+/* Стили для таблицы значений */
+.value-table {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Обеспечивает перенос элементов */
+    gap: 20px; /* Расстояние между колонками */
     margin-top: 20px;
 }
 
 .column {
+    flex-basis: calc(25% - 20px); /* Расчет ширины колонки с учетом gap */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #007bff; /* Синий фон для колонки */
+    color: white; /* Белый текст для колонки */
     padding: 10px;
-    border-radius: 5px;
-}
-
-/* Стили для колонок с минутами */
-.minute-column {
-    background-color: #e7f1ff; /* Светло-синий фон для всей колонки */
-    border: 1px solid #007bff; /* Синяя граница для выделения */
-    padding: 10px;
-    border-radius: 5px; /* Скругление углов */
-    margin-bottom: 20px; /* Отступ между колонками */
-}
-
-/* Переопределение стилей для заголовков внутри синих колонок */
-.minute-column .header {
-    background-color: #007bff; /* Темно-синий фон для заголовков */
-    color: white; /* Белый текст */
+    border-radius: 5px; /* Скругление углов колонки */
 }
 
 .header {
     font-weight: bold;
-    background-color: #007bff; /* Синий фон для заголовков */
-    color: white; /* Белый текст для контраста */
+    width: 100%; /* Заголовок на всю ширину колонки */
+    text-align: center; /* Выравнивание текста заголовка по центру */
     padding: 10px;
-    border-radius: 5px; /* Скругление углов для визуальной привлекательности */
-    margin-bottom: 10px; /* Отступ для разделения от значений */
+    border-radius: 5px 5px 0 0; /* Скругление верхних углов */
+    background-color: #0056b3; /* Немного темнее для заголовка */
 }
 
 .value {
-    width: 100%;
-    text-align: center;
-    padding: 5px 0;
+    width: 100%; /* Значения на всю ширину колонки */
+    padding: 5px 0; /* Паддинги для значений */
+    text-align: center; /* Выравнивание текста значений по центру */
+    border-bottom: 1px solid #004b9b; /* Граница между значениями */
 }
 
-/* Чередование фона для значений */
-.value:nth-child(even) {
-    background-color: #e9ecef;
+.value:last-child {
+    border-bottom: none; /* Убираем границу у последнего значения */
 }
