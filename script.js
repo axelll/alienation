@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('result').textContent = `Time: ${minutes} minutes and ${seconds} seconds`;
     });
 
-    // Функция для заполнения таблицы значений при загрузке страницы
     function fillValueTable() {
         const table = document.getElementById('valueTable');
         // Очищаем таблицу перед заполнением, кроме заголовка
@@ -32,19 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const totalSeconds = (minutes * 60) + seconds;
                 // Используем формулу для расчета соответствующего значения
                 const value = -60 * totalSeconds + 2000000;
-                // Преобразуем значение, чтобы оставить только серединные три цифры и добавить "19" и "00"
-                const middleValue = Math.floor((value - 1900000) / 100);
-                const displayValue = `19${middleValue.toString().padStart(3, '0')}00`;
-                const row = table.insertRow();
-                const timeCell = row.insertCell();
-                const valueCell = row.insertCell();
+                // Корректное формирование строки значения
+                const displayValue = `19${((value - 1900000) / 100).toString().padStart(3, '0')}00`;
+                const row = table.insertRow(-1);
+                const timeCell = row.insertCell(0);
+                const valueCell = row.insertCell(1);
                 timeCell.textContent = `${minutes}m ${seconds}s`;
                 valueCell.textContent = displayValue;
             }
         }
     }
-
-
 
     fillValueTable();
 });
