@@ -27,13 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
             table.deleteRow(1);
         }
     
-        for (let minutes = 9; minutes <= 13; minutes++) {
-            for (let seconds = 0; seconds < 60; seconds += 30) {
+        for (let minutes = 9; minutes <= 12; minutes++) {
+            for (let seconds = 0; seconds < 60; seconds += 10) {
                 const totalSeconds = (minutes * 60) + seconds;
-                // Прямое использование формулы для расчета значения на основе времени
+                // Используем формулу для расчета соответствующего значения
                 const value = -60 * totalSeconds + 2000000;
-                // Формируем строку значения с учетом префикса "19" и суффикса "00"
-                const displayValue = "19" + (Math.round((value - 1900000) / 100) / 10).toString().padStart(3, '0') + "00";
+                // Преобразуем значение, чтобы оставить только серединные три цифры и добавить "19" и "00"
+                const middleValue = Math.floor((value - 1900000) / 100);
+                const displayValue = `19${middleValue.toString().padStart(3, '0')}00`;
                 const row = table.insertRow();
                 const timeCell = row.insertCell();
                 const valueCell = row.insertCell();
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
 
 
     fillValueTable();
