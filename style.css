@@ -60,28 +60,20 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #007bff; /* Синий фон для колонки */
-    color: white; /* Белый текст для колонки */
-    padding: 10px;
-    border-radius: 5px; /* Скругление углов колонки */
 }
 
 .header {
     font-weight: bold;
+    background-color: #007bff; /* Синий фон для заголовков */
+    color: white; /* Белый текст для заголовков */
     width: 100%; /* Заголовок на всю ширину колонки */
     text-align: center; /* Выравнивание текста заголовка по центру */
     padding: 10px;
-    border-radius: 5px 5px 0 0; /* Скругление верхних углов */
-    background-color: #0056b3; /* Немного темнее для заголовка */
+    border-radius: 5px; /* Скругление углов заголовка */
+    margin-bottom: 10px; /* Отступ от заголовка до содержимого колонки */
 }
 
 .value {
-    width: 100%; /* Значения на всю ширину колонки */
     padding: 5px 0; /* Паддинги для значений */
     text-align: center; /* Выравнивание текста значений по центру */
-    border-bottom: 1px solid #004b9b; /* Граница между значениями */
-}
-
-.value:last-child {
-    border-bottom: none; /* Убираем границу у последнего значения */
 }
