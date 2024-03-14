@@ -25,15 +25,17 @@ button {
 }
 
 #valueTable {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Создаем 4 колонки с равным распределением пространства */
-    gap: 10px; /* Расстояние между элементами */
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-#valueTable div {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
+.row {
+    display: flex;
+}
+
+.cell {
+    flex: 1;
     padding: 8px;
-    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
 }
