@@ -9,7 +9,10 @@
 <body>
 <div id="app">
     <h1>Value to Time Calculator</h1>
-    <input type="number" id="inputValue" placeholder="Enter value" />
+    <p>Please enter the middle three digits of the value. The format is 19___00. For example, if your value is 1967600, just type 676.</p>
+    <div>
+        <span>19</span><input type="number" id="inputValue" placeholder="___" style="width: 60px;"><span>00</span>
+    </div>
     <button id="calculateButton">Calculate Time</button>
     <p id="result"></p>
 
