@@ -23,4 +23,17 @@ function fillValueTable() {
         const column = document.createElement('div');
         column.className = 'column';
         const header = document.createElement('div');
-        header.className
+        header.className = 'header';
+        header.textContent = `${minute} minutes`;
+        column.appendChild(header);
+
+        for (let second = 0; second < 60; second += 10) {
+            const valueDiv = document.createElement('div');
+            valueDiv.className = 'value';
+            valueDiv.textContent = `${second}s: 19...00`;
+            column.appendChild(valueDiv);
+        }
+
+        container.appendChild(column);
+    }
+}
