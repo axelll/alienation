@@ -18,24 +18,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('valueTable');
         container.innerHTML = ''; // Очищаем контейнер перед заполнением
         
-        // Создаем колонки для каждой минуты от 9 до 12
-        for (let minute = 9; minute <= 12; minute++) {
-            const minuteDiv = document.createElement('div');
-            minuteDiv.classList.add('minute-column');
-            minuteDiv.innerHTML = `<strong>${minute} минуты</strong>`;
-    
-            // Добавляем временные интервалы в каждую колонку
-            for (let second = 0; second < 60; second += 10) {
+        // Генерируем шапку таблицы с минутами
+        const headerDiv = document.createElement('div');
+        headerDiv.style.display = 'flex';
+        const minutes = ['9 minutes', '10 minutes', '11 minutes', '12 minutes'];
+        minutes.forEach(minute => {
+            const minuteHeader = document.createElement('div');
+            minuteHeader.textContent = minute;
+            minuteHeader.style.flex = '1';
+            minuteHeader.style.padding = '0 10px';
+            headerDiv.appendChild(minuteHeader);
+        });
+        container.appendChild(headerDiv);
+        
+        // Генерируем строки для каждых 10 секунд каждой минуты
+        for (let second = 0; second < 60; second += 10) {
+            const rowDiv = document.createElement('div');
+            rowDiv.style.display = 'flex';
+            
+            // Для каждой минуты добавляем ячейку секунд и значением
+            for (let minute = 9; minute <= 12; minute++) {
                 const totalSeconds = (minute * 60) + second;
                 const value = -60 * totalSeconds + 2000000;
-                const middleValue = ((value - 1900000) / 100).toString().padStart(3, '0');
-                const displayValue = `19${middleValue}00`;
-                minuteDiv.innerHTML += `<br>${minute}m ${second}s: ${displayValue}`;
+                const cellDiv = document.createElement('div');
+                cellDiv.style.flex = '1';
+                cellDiv.style.padding = '0 10px';
+                cellDiv.innerHTML = `${second}s: 19${((value - 1900000) / 100).toString().padStart(3, '0')}00`;
+                rowDiv.appendChild(cellDiv);
             }
-    
-            container.appendChild(minuteDiv);
+            
+            container.appendChild(rowDiv);
         }
     }
+    
+    document.addEventListener('DOMContentLoaded', fillValueTable);
+
 
     fillValueTable();
 });
