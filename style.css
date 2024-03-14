@@ -40,9 +40,28 @@ button {
     border-radius: 5px;
 }
 
+/* Стили для колонок с минутами */
+.minute-column {
+    background-color: #e7f1ff; /* Светло-синий фон для всей колонки */
+    border: 1px solid #007bff; /* Синяя граница для выделения */
+    padding: 10px;
+    border-radius: 5px; /* Скругление углов */
+    margin-bottom: 20px; /* Отступ между колонками */
+}
+
+/* Переопределение стилей для заголовков внутри синих колонок */
+.minute-column .header {
+    background-color: #007bff; /* Темно-синий фон для заголовков */
+    color: white; /* Белый текст */
+}
+
 .header {
     font-weight: bold;
-    margin-bottom: 10px;
+    background-color: #007bff; /* Синий фон для заголовков */
+    color: white; /* Белый текст для контраста */
+    padding: 10px;
+    border-radius: 5px; /* Скругление углов для визуальной привлекательности */
+    margin-bottom: 10px; /* Отступ для разделения от значений */
 }
 
 .value {
