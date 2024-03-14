@@ -16,18 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillValueTable() {
         const container = document.getElementById('valueTable');
-        container.innerHTML = ''; // Очистка контейнера перед заполнением
-
-        for (let minutes = 9; minutes <= 12; minutes++) {
-            for (let seconds = 0; seconds < 60; seconds += 10) {
-                const totalSeconds = (minutes * 60) + seconds;
+        container.innerHTML = ''; // Очищаем контейнер перед заполнением
+        
+        // Создаем колонки для каждой минуты от 9 до 12
+        for (let minute = 9; minute <= 12; minute++) {
+            const minuteDiv = document.createElement('div');
+            minuteDiv.classList.add('minute-column');
+            minuteDiv.innerHTML = `<strong>${minute} минуты</strong>`;
+    
+            // Добавляем временные интервалы в каждую колонку
+            for (let second = 0; second < 60; second += 10) {
+                const totalSeconds = (minute * 60) + second;
                 const value = -60 * totalSeconds + 2000000;
                 const middleValue = ((value - 1900000) / 100).toString().padStart(3, '0');
                 const displayValue = `19${middleValue}00`;
-                const div = document.createElement('div');
-                div.textContent = `${minutes}m ${seconds}s: ${displayValue}`;
-                container.appendChild(div);
+                minuteDiv.innerHTML += `<br>${minute}m ${second}s: ${displayValue}`;
             }
+    
+            container.appendChild(minuteDiv);
         }
     }
 
