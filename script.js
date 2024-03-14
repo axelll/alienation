@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let seconds = 0; seconds < 60; seconds += 10) {
                 const totalSeconds = (minutes * 60) + seconds;
                 const value = -60 * totalSeconds + 2000000;
-                const displayValue = `19${((value - 1900000) / 100).toString().padStart(3, '0')}00`;
+                const middleValue = ((value - 1900000) / 100).toString().padStart(3, '0');
+                const displayValue = `19${middleValue}00`;
                 const div = document.createElement('div');
                 div.textContent = `${minutes}m ${seconds}s: ${displayValue}`;
                 container.appendChild(div);
