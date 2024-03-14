@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Обработчик для калькулятора "Calculate Time"
     document.getElementById('calculateTime').addEventListener('click', function() {
         const inputDigits = document.getElementById('inputValue').value;
         if (!inputDigits || inputDigits.length !== 3 || isNaN(parseInt(inputDigits, 10))) {
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('result').textContent = `Time: ${minutes} minutes and ${seconds} seconds`;
     });
 
+    // Обработчик для калькулятора "Calculate Value"
     document.getElementById('calculateValue').addEventListener('click', function() {
         const minutes = parseInt(document.getElementById('inputMinutes').value, 10);
         const seconds = parseInt(document.getElementById('inputSeconds').value, 10);
@@ -29,7 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function fillValueTable() {
     const container = document.getElementById('valueTable');
-    container.innerHTML = '';
+    // Проверка на существование контейнера
+    if (!container) {
+        console.error('Container for value table does not exist');
+        return;
+    }
+    
+    container.innerHTML = ''; // Очищаем контейнер перед заполнением
+    
     for (let minute = 9; minute <= 12; minute++) {
         const minuteColumn = document.createElement('div');
         minuteColumn.className = 'column';
@@ -37,6 +46,7 @@ function fillValueTable() {
         header.className = 'header';
         header.textContent = `${minute} minutes`;
         minuteColumn.appendChild(header);
+        
         for (let second = 0; second < 60; second += 10) {
             const valueDiv = document.createElement('div');
             valueDiv.className = 'value';
@@ -45,6 +55,7 @@ function fillValueTable() {
             valueDiv.textContent = `${second}s: 19${((calculatedValue - 1900000) / 100).toString().padStart(3, '0')}00`;
             minuteColumn.appendChild(valueDiv);
         }
+        
         container.appendChild(minuteColumn);
     }
 }
