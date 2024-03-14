@@ -14,45 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('result').textContent = `Time: ${minutes} minutes and ${seconds} seconds`;
     });
 
-    function fillValueTable() {
-        const container = document.getElementById('valueTable');
-        container.innerHTML = ''; // Очистка контейнера перед заполнением
-    
-        // Создание шапки таблицы с названиями минут
-        const headerDiv = document.createElement('div');
-        headerDiv.className = 'row header';
-        ['9 minutes', '10 minutes', '11 minutes', '12 minutes'].forEach(minute => {
-            const minuteHeader = document.createElement('div');
-            minuteHeader.className = 'cell';
-            minuteHeader.textContent = minute;
-            headerDiv.appendChild(minuteHeader);
-        });
-        container.appendChild(headerDiv);
-    
-        // Создаем строки таблицы
-        for (let second = 0; second < 60; second += 10) {
-            const rowDiv = document.createElement('div');
-            rowDiv.className = 'row';
-    
-            for (let minute = 9; minute <= 12; minute++) {
-                const cellDiv = document.createElement('div');
-                cellDiv.className = 'cell';
-                
-                const totalSeconds = (minute * 60) + second;
-                const value = -60 * totalSeconds + 2000000;
-                // Форматируем значение как "XXs: 19XXX00"
-                cellDiv.textContent = `${second}s: 19${((value - 1900000) / 100).toString().padStart(3, '0')}00`;
-    
-                rowDiv.appendChild(cellDiv);
-            }
-            
-            container.appendChild(rowDiv);
-        }
-    }
-    
-    document.addEventListener('DOMContentLoaded', fillValueTable);
-
-
-
     fillValueTable();
 });
+
+function fillValueTable() {
+    const container = document.getElementById('valueTable');
+    container.innerHTML = ''; // Clear the container before filling
+
+    for (let minute = 9; minute <= 12; minute++) {
+        const column = document.createElement('div');
+        column.className = 'column';
+        const header = document.createElement('div');
+        header.className = 'header';
+        header.textContent = `${minute} minutes`;
+        column.appendChild(header);
+
+        for (let second = 10; second < 60; second += 10) {
+            const valueDiv = document.createElement('div');
+            valueDiv.textContent = `${second}s`;
+            column.appendChild(valueDiv);
+        }
+
+        container.appendChild(column);
+    }
+}
