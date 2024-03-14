@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value and Time Calculator</title>
+    <title>Score and Time Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-    <h1>Value to Time and Time to Value Calculator</h1>
+    <h1>Score to Time and Time to Score Calculator</h1>
     
+    <!-- Калькулятор времени из score -->
     <div class="input-group">
-        <span>19</span>
-        <input type="number" id="inputValue" placeholder="___" style="width: 60px;">
-        <span>00</span>
-        <button id="calculateTime">Calculate Time</button>
+        <input type="number" id="inputScore" placeholder="Enter score" style="width: 200px;">
+        <button id="calculateTimeFromScore">Calculate Time</button>
     </div>
-    <p id="result"></p>
-
+    <p id="resultFromScore"></p>
+    
+    <!-- Калькулятор score из времени -->
     <div class="time-input-group">
         <input type="number" id="inputMinutes" placeholder="Minutes" style="width: 80px;">
         <input type="number" id="inputSeconds" placeholder="Seconds" style="width: 80px;">
-        <button id="calculateValue">Calculate Value</button>
+        <button id="calculateScore">Calculate Score</button>
     </div>
     <p id="timeResult"></p>
-
-    <h2>Value Table</h2>
-    <div id="valueTable" class="value-table">
-        <!-- JavaScript will populate this -->
+    
+    <h2>Score Table</h2>
+    <div id="scoreTable" class="score-table">
+        <!-- Заполнится через JavaScript -->
     </div>
 </div>
 <script src="script.js"></script>
