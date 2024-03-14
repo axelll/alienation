@@ -22,18 +22,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для заполнения таблицы значений при загрузке страницы
     function fillValueTable() {
         const table = document.getElementById('valueTable');
+        // Очищаем таблицу перед заполнением, кроме заголовка
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }
+    
         for (let minutes = 9; minutes <= 13; minutes++) {
             for (let seconds = 0; seconds < 60; seconds += 30) {
                 const totalSeconds = (minutes * 60) + seconds;
-                const value = "19" + ((2000000 - (totalSeconds * 60)) / 10000).toString().padStart(3, '0') + "00";
+                // Прямое использование формулы для расчета значения на основе времени
+                const value = -60 * totalSeconds + 2000000;
+                // Формируем строку значения с учетом префикса "19" и суффикса "00"
+                const displayValue = "19" + (Math.round((value - 1900000) / 100) / 10).toString().padStart(3, '0') + "00";
                 const row = table.insertRow();
                 const timeCell = row.insertCell();
                 const valueCell = row.insertCell();
                 timeCell.textContent = `${minutes}m ${seconds}s`;
-                valueCell.textContent = value;
+                valueCell.textContent = displayValue;
             }
         }
     }
+
 
     fillValueTable();
 });
