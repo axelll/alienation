@@ -3,14 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Calculator</title>
+<title>Advanced Time Calculator</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-    <h1>Time Calculator</h1>
-    <input type="number" id="numberInput" placeholder="Enter number" />
-    <button id="calculateButton">Calculate Time</button>
+    <h1>Advanced Time Calculator</h1>
+    <select id="modeSelect">
+        <option value="valueToTime">Convert Value to Time</option>
+        <option value="timeToValue">Convert Time to Value</option>
+    </select>
+    <input type="number" id="inputValue" placeholder="Enter value or time" />
+    <input type="number" id="inputSeconds" placeholder="Enter seconds (if time mode)" />
+    <button id="calculateButton">Calculate</button>
     <p id="result"></p>
 </div>
 <script src="script.js"></script>
