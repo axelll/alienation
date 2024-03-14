@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Value Calculator</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Value Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
     <h1>Time Value Calculator</h1>
     <select id="modeSelect">
-        <option value="valueToTime">Convert Value to Time</option>
         <option value="timeToValue">Convert Time to Value</option>
     </select>
-    <div id="valueInputContainer">
-        <input type="number" id="inputValue" placeholder="Enter value" />
-    </div>
-    <div id="timeInputContainer" style="display: none;">
+    <div id="timeInputContainer">
         <input type="number" id="inputMinutes" placeholder="Minutes" />
         <input type="number" id="inputSeconds" placeholder="Seconds" />
+        <button id="calculateButton">Calculate</button>
     </div>
-    <button id="calculateButton">Calculate</button>
     <p id="result"></p>
 
-    <h2>Value Table (Value per Second: 60)</h2>
+    <h2>Value Table</h2>
     <table id="valueTable">
         <tr>
             <th>Time</th>
             <th>Value</th>
         </tr>
-        <!-- Values will be filled by JavaScript -->
+        <!-- Заполнение происходит с помощью JavaScript -->
     </table>
 </div>
 <script src="script.js"></script>
