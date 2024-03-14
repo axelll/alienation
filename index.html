@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value to Time Calculator and Table</title>
+    <title>Value and Time Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-    <h1>Value to Time Calculator</h1>
-    <p>Please enter the middle three digits of the value. The format is 19___00. For example, if your value is 1967600, just type 676.</p>
+    <h1>Value to Time and Time to Value Calculator</h1>
+    
     <div class="input-group">
-        <span>19</span><input type="number" id="inputValue" placeholder="___" style="width: 60px;"><span>00</span>
+        <span>19</span>
+        <input type="number" id="inputValue" placeholder="___" style="width: 60px;">
+        <span>00</span>
+        <button id="calculateTime">Calculate Time</button>
     </div>
-    <button id="calculateButton">Calculate Time</button>
     <p id="result"></p>
+
+    <div class="time-input-group">
+        <input type="number" id="inputMinutes" placeholder="Minutes" style="width: 80px;">
+        <input type="number" id="inputSeconds" placeholder="Seconds" style="width: 80px;">
+        <button id="calculateValue">Calculate Value</button>
+    </div>
+    <p id="timeResult"></p>
 
     <h2>Value Table</h2>
     <div id="valueTable" class="value-table">
