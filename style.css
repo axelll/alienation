@@ -2,7 +2,7 @@ body, html {
     margin: 0;
     padding: 20px;
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Светлый фон для всей страницы */
+    background-color: #f8f9fa;
 }
 
 #app {
@@ -27,36 +27,36 @@ input, button {
 
 button {
     cursor: pointer;
-    background-color: #0056b3; /* Темно-синий фон для кнопки */
-    color: white; /* Белый текст для кнопки */
-    border: none; /* Убираем границу кнопки */
-    border-radius: 5px; /* Скругление углов кнопки */
-    padding: 10px 20px; /* Паддинги для кнопки */
-    font-size: 16px; /* Размер шрифта для кнопки */
-    transition: background-color 0.3s; /* Анимация для кнопки */
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #003875; /* Цвет кнопки при наведении */
+    background-color: #003875;
 }
 
 #result {
     margin-top: 20px;
     font-size: 18px;
-    color: #28a745; /* Зеленый цвет текста для результата */
+    color: #28a745;
 }
 
 /* Стили для таблицы значений */
 .value-table {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Обеспечивает перенос элементов */
-    gap: 20px; /* Расстояние между колонками */
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 20px;
     margin-top: 20px;
 }
 
 .column {
-    flex-basis: calc(25% - 20px); /* Расчет ширины колонки с учетом gap */
+    width: 24%; /* Поправлено для 4 колонок в ряд */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,16 +64,18 @@ button:hover {
 
 .header {
     font-weight: bold;
-    background-color: #007bff; /* Синий фон для заголовков */
-    color: white; /* Белый текст для заголовков */
-    width: 100%; /* Заголовок на всю ширину колонки */
-    text-align: center; /* Выравнивание текста заголовка по центру */
+    background-color: #007bff; /* Синий цвет только для заголовков */
+    color: white;
+    width: 100%;
+    text-align: center;
     padding: 10px;
-    border-radius: 5px; /* Скругление углов заголовка */
-    margin-bottom: 10px; /* Отступ от заголовка до содержимого колонки */
+    border-radius: 5px;
+    box-sizing: border-box; /* Убедитесь, что padding не изменяет размер */
 }
 
 .value {
-    padding: 5px 0; /* Паддинги для значений */
-    text-align: center; /* Выравнивание текста значений по центру */
+    text-align: center;
+    padding: 5px 0;
+    width: 100%; /* Чтобы значения были на всю ширину колонки */
+    box-sizing: border-box; /* Убедитесь, что padding не изменяет размер */
 }
