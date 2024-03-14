@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('calculateButton').addEventListener('click', function() {
-        const inputMinutes = parseInt(document.getElementById('inputMinutes').value, 10) || 0;
-        const inputSeconds = parseInt(document.getElementById('inputSeconds').value, 10) || 0;
-        const totalSeconds = inputMinutes * 60 + inputSeconds;
-        const value = -60 * totalSeconds + 2000000;
-        document.getElementById('result').textContent = `Value: ${value}`;
+        const inputValue = parseInt(document.getElementById('inputValue').value, 10) || 0;
+        // Преобразование значения обратно во время
+        const totalSeconds = (2000000 - inputValue) / 60;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        document.getElementById('result').textContent = `Time: ${minutes} minutes and ${seconds} seconds`;
     });
 
     function fillValueTable() {
