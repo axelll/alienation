@@ -59,7 +59,24 @@ th {
     color: white;
 }
 
+/* Оформление первой колонки со временем */
+th:first-child, td:first-child {
+    background-color: #ff8c00; /* Темно-оранжевый цвет для первой колонки */
+    color: white;
+}
+
+/* Оформление заголовочной строки */
+tr:first-child th {
+    background-color: #0056b3; /* Синий цвет для заголовков */
+    color: white;
+}
+
 /* Четные строки таблицы */
-tr:nth-child(even) {
+tr:nth-child(even) td {
     background-color: #f2f2f2;
+}
+
+/* Нечетные строки таблицы */
+tr:nth-child(odd) td {
+    background-color: #fff;
 }
