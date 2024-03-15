@@ -19,7 +19,7 @@
     <p id="scoreOutput"></p>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.8
+        Version: 0.0.9
     </div>
 
     <script>
@@ -28,7 +28,13 @@
             const totalCentiseconds = Math.floor((2000000 - score) * 100 / 60);
             const minutes = Math.floor(totalCentiseconds / 6000);
             const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-            const centiseconds = Math.floor((totalCentiseconds % 100));
+            // Для получения центисекунд используем остаток от деления на 100 и округляем его до ближайших 10, чтобы избежать ошибок округления
+            let centiseconds = Math.floor(totalCentiseconds % 100);
+            // Коррекция округления для центисекунд
+            if (centiseconds % 10 === 9 && (2000000 - score) % 60 > 0) {
+                centiseconds += 1;
+            }
+            centiseconds = centiseconds % 100; // Обеспечиваем, что центисекунды не превысят 99
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
 
