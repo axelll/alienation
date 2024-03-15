@@ -3,53 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score and Time Converter</title>
+    <title>Score and Time Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Score to Time Converter</h2>
-    <input type="number" id="inputScore" placeholder="Enter score" value="1925048">
-    <button onclick="convertScoreToTime()">Convert Score to Time</button>
-    <p id="timeOutput"></p>
-
-    <h2>Time to Score Converter</h2>
-    <input type="number" id="inputMinutes" placeholder="Minutes" value="20">
-    <input type="number" id="inputSeconds" placeholder="Seconds" value="49">
-    <input type="number" id="inputCentiseconds" placeholder="Centiseconds" min="0" max="99" value="19">
-    <button onclick="convertTimeToScore()">Convert Time to Score</button>
-    <p id="scoreOutput"></p>
-
-    <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.14
+<div id="app">
+    <h1>Score to Time and Time to Score Calculator</h1>
+    
+    <!-- Калькулятор времени из score -->
+    <div class="input-group">
+        <input type="number" id="inputScore" placeholder="Enter score">
+        <button id="calculateTimeFromScore">Calculate Time</button>
     </div>
+    <p id="resultFromScore"></p>
+    
+    <!-- Калькулятор score из времени -->
+    <div class="time-input-group">
+        <input type="number" id="inputMinutes" placeholder="Minutes">
+        <input type="number" id="inputSeconds" placeholder="Seconds">
+        <input type="number" id="inputCentiseconds" placeholder="Centiseconds">
+        <button id="calculateScore">Calculate Score</button>
+    </div>
+    <p id="timeResult"></p>
+    
+    <h2>Score Table</h2>
+    <table id="scoreTable"></table>
+</div>
 
-    <script>
-        function convertScoreToTime() {
-            const score = parseInt(document.getElementById('inputScore').value, 10);
-            const totalSeconds = (2000000 - score) / 60;
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = Math.floor(totalSeconds % 60);
-        
-            // Попробуем улучшить расчет центисекунд
-            const fraction = totalSeconds - Math.floor(totalSeconds); // Дробная часть секунды
-            let centiseconds = Math.round(fraction * 100);
-        
-            // Коррекция для случая, когда округление дает 100 центисекунд
-            if (centiseconds === 100) {
-                centiseconds = 99;
-            }
-        
-            document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
-        }
+<script type="module">
+import { convertScoreToTime, convertTimeToScore } from './scoreTimeConverter.js';
 
+document.getElementById('calculateTimeFromScore').addEventListener('click', () => {
+    const score = parseInt(document.getElementById('inputScore').value, 10);
+    document.getElementById('resultFromScore').textContent = convertScoreToTime(score);
+});
 
-        function convertTimeToScore() {
-            const minutes = document.getElementById('inputMinutes').value;
-            const seconds = document.getElementById('inputSeconds').value;
-            const centiseconds = document.getElementById('inputCentiseconds').value;
-            const totalCentiseconds = parseInt(minutes) * 60 * 100 + parseInt(seconds) * 100 + parseInt(centiseconds);
-            const score = 2000000 - totalCentiseconds * 60 / 100;
-            document.getElementById('scoreOutput').textContent = `Score: ${Math.floor(score)}`;
-        }
-    </script>
+document.getElementById('calculateScore').addEventListener('click', () => {
+    const minutes = parseInt(document.getElementById('inputMinutes').value, 10);
+    const seconds = parseInt(document.getElementById('inputSeconds').value, 10);
+    const centiseconds = parseInt(document.getElementById('inputCentiseconds').value, 10);
+    document.getElementById('timeResult').textContent = `Score: ${convertTimeToScore(minutes, seconds, centiseconds)}`;
+});
+</script>
 </body>
 </html>
