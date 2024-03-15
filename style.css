@@ -59,18 +59,7 @@ th {
     color: white;
 }
 
-/* Стили для оранжевых ячеек */
-.orange-bg {
-    background-color: #ff8c00; /* Оранжевый цвет для первой колонки */
-    color: white;
-}
-
 /* Четные строки таблицы */
-tr:nth-child(even) td {
+tr:nth-child(even) {
     background-color: #f2f2f2;
-}
-
-/* Нечетные строки таблицы */
-tr:nth-child(odd) td {
-    background-color: #fff;
 }
