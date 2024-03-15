@@ -6,19 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayGameInfo() {
     const appElement = document.getElementById('app');
+    const headerElement = document.querySelector('h1'); // Находим заголовок
+
     const infoElement = document.createElement('p');
     infoElement.textContent = 'This calculator is for the game Alienation on PlayStation 4 and 5.';
     infoElement.style.textAlign = 'center';
     infoElement.style.marginBottom = '10px';
 
     const noteElement = document.createElement('p');
-    noteElement.innerHTML = 'Note: Due to the way time is calculated from the score, the centiseconds value may vary by ±1. ' + 
-                            'This is a result of rounding errors inherent in the conversion process between the score and the time format.';
+    noteElement.textContent = 'Note: Due to the way time is calculated from the score, the centiseconds value may vary by ±1. ' +
+                             'This is a result of rounding errors inherent in the conversion process between the score and the time format.';
     noteElement.style.textAlign = 'center';
     noteElement.style.marginBottom = '20px';
 
-    appElement.insertBefore(noteElement, appElement.firstChild);
-    appElement.insertBefore(infoElement, appElement.firstChild);
+    // Вставляем описание и примечание после заголовка
+    headerElement.insertAdjacentElement('afterend', noteElement);
+    headerElement.insertAdjacentElement('afterend', infoElement);
 }
 
 function fillValueTable() {
@@ -44,7 +47,7 @@ function fillValueTable() {
 }
 
 function displayVersion() {
-    const version = 'v1.0.6'; // Обновленная версия
+    const version = 'v1.0.7'; // Обновленная версия
     const versionElement = document.createElement('div');
     versionElement.style.position = 'fixed';
     versionElement.style.bottom = '0';
