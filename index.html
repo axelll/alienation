@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score and Time Converter with Tests</title>
+    <title>Score and Time Converter</title>
 </head>
 <body>
     <h2>Score to Time Converter</h2>
@@ -18,8 +18,6 @@
     <button onclick="convertTimeToScore()">Convert Time to Score</button>
     <p id="scoreOutput"></p>
 
-    <div id="testResults"></div>
-
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
         Version: 0.0.7
     </div>
@@ -30,7 +28,6 @@
             const totalCentiseconds = Math.floor((2000000 - score) * 100 / 60);
             const minutes = Math.floor(totalCentiseconds / 6000);
             const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-            // Используем floor для центисекунд и корректируем расчет
             const centiseconds = Math.floor((totalCentiseconds % 100));
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
@@ -39,15 +36,10 @@
             const minutes = document.getElementById('inputMinutes').value;
             const seconds = document.getElementById('inputSeconds').value;
             const centiseconds = document.getElementById('inputCentiseconds').value;
-            const totalCentiseconds = (parseInt(minutes) * 60 + parseInt(seconds)) * 100 + parseInt(centiseconds);
-            const score = 2000000 - (totalCentiseconds * 60 / 100);
-            document.getElementById('scoreOutput').textContent = `Score: ${score}`;
+            const totalCentiseconds = parseInt(minutes) * 60 * 100 + parseInt(seconds) * 100 + parseInt(centiseconds);
+            const score = 2000000 - totalCentiseconds * 60 / 100;
+            document.getElementById('scoreOutput').textContent = `Score: ${Math.floor(score)}`;
         }
-
-        window.onload = function() {
-            convertScoreToTime(); // Automatically convert the predefined score to time
-            convertTimeToScore(); // Automatically convert the predefined time to score
-        };
     </script>
 </body>
 </html>
