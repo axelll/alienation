@@ -29,9 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function fillValueTable() {
     const table = document.getElementById('scoreTable');
     const headerRow = table.insertRow();
-    
-    // Заполнение заголовков
-    headerRow.insertCell().textContent = ''; // Пустая ячейка для секунд
+
+    // Первая ячейка заголовка с оранжевым фоном
+    const firstHeaderCell = headerRow.insertCell();
+    firstHeaderCell.textContent = 'Time';
+    firstHeaderCell.className = 'orange-bg';
+
+    // Заполнение заголовков синим фоном
     for (let minute = 9; minute <= 12; minute++) {
         const headerCell = headerRow.insertCell();
         headerCell.textContent = `${minute} minutes`;
@@ -41,11 +45,15 @@ function fillValueTable() {
     // Заполнение данных таблицы
     for (let second = 0; second < 60; second += 10) {
         const row = table.insertRow();
-        row.insertCell().textContent = `${second} seconds`;
+
+        // Первая ячейка данных с оранжевым фоном
+        const firstDataCell = row.insertCell();
+        firstDataCell.textContent = `${second} seconds`;
+        firstDataCell.className = 'orange-bg';
+
+        // Оставшиеся ячейки данных
         for (let minute = 9; minute <= 12; minute++) {
-            const totalSeconds = minute * 60 + second;
-            const score = -60 * totalSeconds + 2000000;
-            row.insertCell().textContent = score.toLocaleString('ru-RU');
+            // ... Ваш код для заполнения ячеек данными ...
         }
     }
 }
