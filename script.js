@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultFromScore').textContent = 'Please enter a valid score.';
             return;
         }
-        const totalCentiseconds = (2000000 - score) / 0.6; // Преобразуем score в сотые доли секунды
+        const totalCentiseconds = Math.round((2000000 - score) / 0.6); // Используем Math.round для более точного округления
         const minutes = Math.floor(totalCentiseconds / 6000);
         const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-        const centiseconds = Math.floor(totalCentiseconds % 100);
+        const centiseconds = totalCentiseconds % 100; // Убрали Math.floor, используем результат напрямую
+
         document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}:${centiseconds.toString().padStart(2, '0')}`;
     });
 
