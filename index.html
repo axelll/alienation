@@ -19,21 +19,25 @@
     <p id="scoreOutput"></p>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.10
+        Version: 0.0.11
     </div>
 
     <script>
         function convertScoreToTime() {
             const score = document.getElementById('inputScore').value;
-            // Вычисляем общее количество секунд
+            // Преобразование score в секунды с более высокой точностью
             const totalSecondsExact = (2000000 - score) / 60;
             const minutes = Math.floor(totalSecondsExact / 60);
-            const seconds = Math.floor(totalSecondsExact) % 60;
-            // Вычисляем центисекунды, учитывая точное значение секунд
-            const centiseconds = Math.floor((totalSecondsExact - Math.floor(totalSecondsExact)) * 100);
-    
+            const seconds = Math.floor(totalSecondsExact % 60);
+            
+            // Для получения центисекунд используем разницу между полными и точными секундами
+            const centisecondsExact = Math.floor((totalSecondsExact - Math.floor(totalSecondsExact)) * 100);
+            // Проверка и корректировка округления для центисекунд
+            const centiseconds = centisecondsExact === 100 ? 99 : centisecondsExact;
+        
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
+
         function convertTimeToScore() {
             const minutes = document.getElementById('inputMinutes').value;
             const seconds = document.getElementById('inputSeconds').value;
