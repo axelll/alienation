@@ -5,26 +5,26 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultFromScore').textContent = 'Please enter a valid score.';
             return;
         }
-        // Изменяем формулу для точного соответствия заданному score и времени
-        const totalCentiseconds = (2000000 - score) * 100 / 60;
-        const minutes = Math.floor(totalCentiseconds / 6000);
-        const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-        const centiseconds = Math.round(totalCentiseconds % 100); // Добавляем округление для centiseconds
 
-        document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}:${centiseconds.toString().padStart(2, '0')}`;
+        // Исправленное преобразование score во время для точного соответствия заданному примеру
+        const totalSeconds = Math.floor((2000000 - score) / 60);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        // Отображение времени в формате mm:ss, сотые доли секунды не учитываем для упрощения
+        document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
     });
 
     document.getElementById('calculateScore').addEventListener('click', function() {
         const minutes = parseInt(document.getElementById('inputMinutes').value, 10);
         const seconds = parseInt(document.getElementById('inputSeconds').value, 10);
-        const centiseconds = 0; // Учитываем, что сотые доли секунды не вводятся, но можно добавить поле для ввода, если нужно
         if (isNaN(minutes) || isNaN(seconds)) {
             document.getElementById('timeResult').textContent = 'Please enter valid minutes and seconds.';
             return;
         }
-        const totalCentiseconds = (minutes * 60 + seconds) * 100 + centiseconds;
-        const score = 2000000 - (totalCentiseconds * 60 / 100);
-        document.getElementById('timeResult').textContent = `Score: ${Math.round(score)}`;
+        // Расчет score из введенного времени, сотые доли секунды игнорируем
+        const totalSeconds = minutes * 60 + seconds;
+        const score = 2000000 - totalSeconds * 60;
+        document.getElementById('timeResult').textContent = `Score: ${score}`;
     });
 
     fillValueTable();
@@ -34,27 +34,26 @@ document.addEventListener('DOMContentLoaded', function() {
 function fillValueTable() {
     const table = document.getElementById('scoreTable');
     const headerRow = table.insertRow();
-    
     headerRow.insertCell().textContent = ''; // Пустая ячейка для секунд
     for (let minute = 9; minute <= 12; minute++) {
         const headerCell = headerRow.insertCell();
         headerCell.textContent = `${minute} minutes`;
         headerCell.className = 'header';
     }
-    
+
     for (let second = 0; second < 60; second += 10) {
         const row = table.insertRow();
         row.insertCell().textContent = `${second} seconds`;
         for (let minute = 9; minute <= 12; minute++) {
             const totalSeconds = minute * 60 + second;
-            const score = 2000000 - (totalSeconds * 60);
+            const score = 2000000 - totalSeconds * 60;
             row.insertCell().textContent = score.toLocaleString('ru-RU');
         }
     }
 }
 
 function displayVersionHash() {
-    const versionHash = 'v1.0.2'; // Обновите этот хэш при каждом изменении кода
+    const versionHash = 'v1.0.3'; // Обновление версии
     const versionElement = document.createElement('div');
     versionElement.style.position = 'fixed';
     versionElement.style.bottom = '0';
