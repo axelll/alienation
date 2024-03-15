@@ -36,7 +36,7 @@ button:hover {
     background-color: #003875;
 }
 
-#result, #timeResult {
+#resultFromScore, #timeResult {
     margin-top: 20px;
     font-size: 18px;
 }
@@ -59,7 +59,7 @@ th {
     color: white;
 }
 
-/* Четные строки таблицы */
+/* Четные строки таблицы для лучшей читаемости */
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
