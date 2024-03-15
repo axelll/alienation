@@ -27,26 +27,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fillValueTable() {
-    const container = document.getElementById('scoreTable');
-    container.innerHTML = '';
-
-    // Создаем заголовки
+    const table = document.getElementById('scoreTable');
+    const headerRow = table.insertRow();
+    
+    // Заполнение заголовков
+    headerRow.insertCell().textContent = ''; // Пустая ячейка для секунд
     for (let minute = 9; minute <= 12; minute++) {
-        const header = document.createElement('div');
-        header.className = 'header';
-        header.textContent = `${minute} min`;
-        container.appendChild(header);
+        const headerCell = headerRow.insertCell();
+        headerCell.textContent = `${minute} minutes`;
+        headerCell.className = 'header';
     }
-
-    // Заполнение значений для каждых 10 секунд
+    
+    // Заполнение данных таблицы
     for (let second = 0; second < 60; second += 10) {
+        const row = table.insertRow();
+        row.insertCell().textContent = `${second} seconds`;
         for (let minute = 9; minute <= 12; minute++) {
             const totalSeconds = minute * 60 + second;
             const score = -60 * totalSeconds + 2000000;
-            const value = document.createElement('div');
-            value.className = 'value';
-            value.textContent = `${second}s score: ${score.toLocaleString('ru-RU')}`;
-            container.appendChild(value);
+            row.insertCell().textContent = score.toLocaleString('ru-RU');
         }
     }
 }
