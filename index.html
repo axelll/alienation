@@ -21,16 +21,17 @@
     <div id="testResults"></div>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.5
+        Version: 0.0.6
     </div>
 
     <script>
         function convertScoreToTime() {
             const score = document.getElementById('inputScore').value;
-            const totalCentiseconds = Math.round((2000000 - score) * 100 / 60);
+            // Using Math.floor to ensure we round down the centiseconds correctly
+            const totalCentiseconds = Math.floor((2000000 - score) * 100 / 60);
             const minutes = Math.floor(totalCentiseconds / 6000);
             const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-            const centiseconds = Math.round((totalCentiseconds % 100) / 10); // Adjusted rounding for centiseconds
+            const centiseconds = Math.floor((totalCentiseconds % 100));
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
 
@@ -39,11 +40,10 @@
             const seconds = document.getElementById('inputSeconds').value;
             const centiseconds = document.getElementById('inputCentiseconds').value;
             const totalCentiseconds = (parseInt(minutes) * 60 + parseInt(seconds)) * 100 + parseInt(centiseconds);
-            const score = Math.floor(2000000 - (totalCentiseconds * 60 / 100));
+            const score = 2000000 - (totalCentiseconds * 60 / 100);
             document.getElementById('scoreOutput').textContent = `Score: ${score}`;
         }
 
-        // Run tests automatically to display the conversion results for predefined values
         window.onload = function() {
             convertScoreToTime(); // Automatically convert the predefined score to time
             convertTimeToScore(); // Automatically convert the predefined time to score
