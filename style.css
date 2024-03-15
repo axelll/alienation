@@ -48,18 +48,20 @@ table {
     margin-top: 20px;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
+/* Стили для заголовков таблицы */
 th {
-    background-color: #0056b3;
-    color: white;
+    background-color: #0056b3; /* Синий цвет фона, как у кнопок */
+    color: white; /* Белый текст */
+    padding: 10px; /* Отступы для текста внутри */
 }
 
-/* Четные строки таблицы для лучшей читаемости */
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+/* Стили для ячеек таблицы */
+td {
+    padding: 10px; /* Отступы для текста внутри */
+    border: 1px solid #ddd; /* Граница вокруг ячеек */
+}
+
+/* Добавим стили для заголовочной ячейки секунд */
+th:first-child {
+    background-color: #ff8c00; /* Оранжевый цвет для отличия */
 }
