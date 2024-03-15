@@ -21,16 +21,16 @@
     <div id="testResults"></div>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.6
+        Version: 0.0.7
     </div>
 
     <script>
         function convertScoreToTime() {
             const score = document.getElementById('inputScore').value;
-            // Using Math.floor to ensure we round down the centiseconds correctly
             const totalCentiseconds = Math.floor((2000000 - score) * 100 / 60);
             const minutes = Math.floor(totalCentiseconds / 6000);
             const seconds = Math.floor((totalCentiseconds % 6000) / 100);
+            // Используем floor для центисекунд и корректируем расчет
             const centiseconds = Math.floor((totalCentiseconds % 100));
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
