@@ -19,21 +19,28 @@
     <p id="scoreOutput"></p>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.13
+        Version: 0.0.14
     </div>
 
     <script>
         function convertScoreToTime() {
             const score = parseInt(document.getElementById('inputScore').value, 10);
-            // Общее время в секундах с высокой точностью
-            const totalSecondsExact = (2000000 - score) / 60;
-            const minutes = Math.floor(totalSecondsExact / 60);
-            const seconds = Math.floor(totalSecondsExact) % 60;
-            // Вычисление центисекунд с учетом точности
-            const centiseconds = Math.round((totalSecondsExact - Math.floor(totalSecondsExact)) * 100);
+            const totalSeconds = (2000000 - score) / 60;
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = Math.floor(totalSeconds % 60);
         
-            document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds < 10 ? '0' + centiseconds : centiseconds} centiseconds`;
+            // Попробуем улучшить расчет центисекунд
+            const fraction = totalSeconds - Math.floor(totalSeconds); // Дробная часть секунды
+            let centiseconds = Math.round(fraction * 100);
+        
+            // Коррекция для случая, когда округление дает 100 центисекунд
+            if (centiseconds === 100) {
+                centiseconds = 99;
+            }
+        
+            document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
+
 
         function convertTimeToScore() {
             const minutes = document.getElementById('inputMinutes').value;
