@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultFromScore').textContent = 'Please enter a valid score.';
             return;
         }
-
-        // Исправленное преобразование score во время для точного соответствия заданному примеру
+        
         const totalSeconds = Math.floor((2000000 - score) / 60);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
-        // Отображение времени в формате mm:ss, сотые доли секунды не учитываем для упрощения
-        document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}:00`;
     });
 
     document.getElementById('calculateScore').addEventListener('click', function() {
@@ -21,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('timeResult').textContent = 'Please enter valid minutes and seconds.';
             return;
         }
-        // Расчет score из введенного времени, сотые доли секунды игнорируем
         const totalSeconds = minutes * 60 + seconds;
         const score = 2000000 - totalSeconds * 60;
         document.getElementById('timeResult').textContent = `Score: ${score}`;
@@ -35,16 +32,16 @@ function fillValueTable() {
     const table = document.getElementById('scoreTable');
     const headerRow = table.insertRow();
     headerRow.insertCell().textContent = ''; // Пустая ячейка для секунд
-    for (let minute = 9; minute <= 12; minute++) {
+    for (let minute = 0; minute <= 59; minute++) {
         const headerCell = headerRow.insertCell();
-        headerCell.textContent = `${minute} minutes`;
+        headerCell.textContent = `${minute} minute${minute === 1 ? '' : 's'}`;
         headerCell.className = 'header';
     }
 
-    for (let second = 0; second < 60; second += 10) {
+    for (let second = 0; second < 60; second++) {
         const row = table.insertRow();
-        row.insertCell().textContent = `${second} seconds`;
-        for (let minute = 9; minute <= 12; minute++) {
+        row.insertCell().textContent = `${second} second${second === 1 ? '' : 's'}`;
+        for (let minute = 0; minute <= 59; minute++) {
             const totalSeconds = minute * 60 + second;
             const score = 2000000 - totalSeconds * 60;
             row.insertCell().textContent = score.toLocaleString('ru-RU');
@@ -53,7 +50,7 @@ function fillValueTable() {
 }
 
 function displayVersionHash() {
-    const versionHash = 'v1.0.3'; // Обновление версии
+    const versionHash = 'v1.0.4'; // Обновлен номер версии
     const versionElement = document.createElement('div');
     versionElement.style.position = 'fixed';
     versionElement.style.bottom = '0';
