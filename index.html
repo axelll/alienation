@@ -3,34 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score and Time Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Score and Time Converter with Tests</title>
 </head>
 <body>
-<div id="app">
-    <h1>Score to Time and Time to Score Calculator</h1>
-    
-    <!-- Калькулятор времени из score -->
-    <div class="input-group">
-        <input type="number" id="inputScore" placeholder="Enter score" style="width: 200px;">
-        <button id="calculateTimeFromScore">Calculate Time</button>
+    <h2>Score to Time Converter</h2>
+    <input type="number" id="inputScore" placeholder="Enter score" value="2000000">
+    <button onclick="convertScoreToTime()">Convert Score to Time</button>
+    <p id="timeOutput"></p>
+
+    <h2>Time to Score Converter</h2>
+    <input type="number" id="inputMinutes" placeholder="Minutes" value="0">
+    <input type="number" id="inputSeconds" placeholder="Seconds" value="0">
+    <input type="number" id="inputCentiseconds" placeholder="Centiseconds" min="0" max="99" value="0">
+    <button onclick="convertTimeToScore()">Convert Time to Score</button>
+    <p id="scoreOutput"></p>
+
+    <div id="testResults"></div>
+
+    <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
+        Version: 0.0.2
     </div>
-    <p id="resultFromScore"></p>
-    
-    <!-- Калькулятор score из времени -->
-    <div class="time-input-group">
-        <input type="number" id="inputMinutes" placeholder="Minutes" style="width: 80px;">
-        <input type="number" id="inputSeconds" placeholder="Seconds" style="width: 80px;">
-        <input type="number" id="inputCentiseconds" placeholder="Centiseconds" style="width: 80px;"> <!-- Новое поле для сотых -->
-        <button id="calculateScore">Calculate Score</button>
-    </div>
-    <p id="timeResult"></p>
-    
-    <h2>Score Table</h2>
-    <table id="scoreTable">
-        <!-- Заполнится через JavaScript -->
-    </table>
-</div>
-<script src="script.js"></script>
+
+    <script>
+        function convertScoreToTime() {
+            const score = document.getElementById('inputScore').value;
+            const totalCentiseconds = (2000000 - score) * 100 / 60;
+            const minutes = Math.floor(totalCentiseconds / 6000);
+            const seconds = Math.floor((totalCentiseconds % 6000) / 100);
+            const centiseconds = Math.floor(totalCentiseconds % 100);
+            document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
+        }
+
+        function convertTimeToScore() {
+            const minutes = document.getElementById('inputMinutes').value;
+            const seconds = document.getElementById('inputSeconds').value;
+            const centiseconds = document.getElementById('inputCentiseconds').value;
+            const totalCentiseconds = (parseInt(minutes) * 60 + parseInt(seconds)) * 100 + parseInt(centiseconds);
+            const score = 2000000 - (totalCentiseconds * 60 / 100);
+            document.getElementById('scoreOutput').textContent = `Score: ${score}`;
+        }
+
+        // Добавление функции для выполнения тестов
+        function runTests() {
+            // Заполните значения для тестов и их ожидаемые результаты
+            const tests = [
+                { score: 1998000, expectedTime: "0 minutes, 3 seconds, and 33 centiseconds" },
+                { minutes: 0, seconds: 30, centiseconds: 50, expectedScore: 1998150 }
+            ];
+
+            let testResultsHtml = "Test Results:<br>";
+
+            // Тестирование преобразования из score во время
+            tests.forEach(test => {
+                const totalCentiseconds = (2000000 - test.score) * 100 / 60;
+                const minutes = Math.floor(totalCentiseconds / 6000);
+                const seconds = Math.floor((totalCentiseconds % 6000) / 100);
+                const centiseconds = Math.floor(totalCentiseconds % 100);
+                const resultTime = `${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
+                testResultsHtml += `Score ${test.score} => Time: ${resultTime} | Expected: ${test.expectedTime}<br>`;
+            });
+
+            // Тестирование преобразования из времени в score
+            tests.forEach(test => {
+                if (test.minutes !== undefined) {
+                    const totalCentiseconds = (parseInt(test.minutes) * 60 + parseInt(test.seconds)) * 100 + parseInt(test.centiseconds);
+                    const score = 2000000 - (totalCentiseconds * 60 / 100);
+                    testResultsHtml += `Time ${test.minutes}m ${test.seconds}s ${test.centiseconds}cs => Score: ${score} | Expected: ${test.expectedScore}<br>`;
+                }
+            });
+
+            document.getElementById('testResults').innerHTML = testResultsHtml;
+        }
+
+        // Вызов функции runTests при загрузке страницы
+        window.onload = runTests;
+    </script>
 </body>
 </html>
