@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultFromScore').textContent = 'Please enter a valid score.';
             return;
         }
-        const totalCentiseconds = Math.round((2000000 - score) / 0.6); // Используем Math.round для более точного округления
+        // Откорректированное вычисление времени из score для более точного результата
+        const totalCentiseconds = Math.round((2000000 - score) * 100 / 60); // Переводим score в сотые доли секунды
         const minutes = Math.floor(totalCentiseconds / 6000);
         const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-        const centiseconds = totalCentiseconds % 100; // Убрали Math.floor, используем результат напрямую
+        const centiseconds = totalCentiseconds % 100; 
 
         document.getElementById('resultFromScore').textContent = `Calculated time: ${minutes}:${seconds.toString().padStart(2, '0')}:${centiseconds.toString().padStart(2, '0')}`;
     });
@@ -16,13 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('calculateScore').addEventListener('click', function() {
         const minutes = parseInt(document.getElementById('inputMinutes').value, 10);
         const seconds = parseInt(document.getElementById('inputSeconds').value, 10);
-        const centiseconds = parseInt(document.getElementById('inputCentiseconds').value, 10); // Получаем сотые доли секунды
+        const centiseconds = parseInt(document.getElementById('inputCentiseconds').value, 10);
         if (isNaN(minutes) || isNaN(seconds) || isNaN(centiseconds)) {
             document.getElementById('timeResult').textContent = 'Please enter valid time.';
             return;
         }
+        // Используем секунды и сотые для более точного расчета score
         const totalCentiseconds = (minutes * 60 + seconds) * 100 + centiseconds;
-        const score = -0.6 * totalCentiseconds + 2000000;
+        const score = Math.round((2000000 - totalCentiseconds * 0.6) / 1); // Убираем десятичные для точности
+
         document.getElementById('timeResult').textContent = `Score: ${score.toLocaleString('ru-RU')}`;
     });
 
