@@ -47,7 +47,7 @@ function fillValueTable() {
 }
 
 function displayVersion() {
-    const version = 'v1.0.7'; // Обновленная версия
+    const version = 'v1.0.8'; // Обновленная версия
     const versionElement = document.createElement('div');
     versionElement.style.position = 'fixed';
     versionElement.style.bottom = '0';
