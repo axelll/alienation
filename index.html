@@ -21,18 +21,16 @@
     <div id="testResults"></div>
 
     <div id="version" style="position: fixed; bottom: 0; right: 0; padding: 10px; background-color: lightgrey;">
-        Version: 0.0.4
+        Version: 0.0.5
     </div>
 
     <script>
         function convertScoreToTime() {
             const score = document.getElementById('inputScore').value;
-            // Округляем общее число секунд до ближайшего целого перед переводом в центисекунды
-            const totalCentiseconds = Math.floor((2000000 - score) / 0.6);
+            const totalCentiseconds = Math.round((2000000 - score) * 100 / 60);
             const minutes = Math.floor(totalCentiseconds / 6000);
             const seconds = Math.floor((totalCentiseconds % 6000) / 100);
-            // Округляем вниз для получения точных центисекунд, добавляя проверку на остаток
-            const centiseconds = Math.floor(totalCentiseconds % 100);
+            const centiseconds = Math.round((totalCentiseconds % 100) / 10); // Adjusted rounding for centiseconds
             document.getElementById('timeOutput').textContent = `Time: ${minutes} minutes, ${seconds} seconds, and ${centiseconds} centiseconds`;
         }
 
@@ -41,24 +39,15 @@
             const seconds = document.getElementById('inputSeconds').value;
             const centiseconds = document.getElementById('inputCentiseconds').value;
             const totalCentiseconds = (parseInt(minutes) * 60 + parseInt(seconds)) * 100 + parseInt(centiseconds);
-            // Округляем результат до ближайшего целого числа вниз для получения score
-            const score = Math.floor(2000000 - totalCentiseconds * 0.6);
+            const score = Math.floor(2000000 - (totalCentiseconds * 60 / 100));
             document.getElementById('scoreOutput').textContent = `Score: ${score}`;
         }
 
-        function runTests() {
-            const testResultsHtml = `Test Result for Score 1925048: <br>` +
-                `Expected Time: 20 minutes, 49 seconds, and 19 centiseconds<br>` +
-                `Test Result for Time 20:49:19: <br>` +
-                `Expected Score: 1925048<br>`;
-
-            document.getElementById('testResults').innerHTML = testResultsHtml;
-            convertScoreToTime(); // Запуск теста преобразования score во время
-            convertTimeToScore(); // Запуск теста преобразования времени в score
-        }
-
-        // Вызов функции runTests при загрузке страницы
-        window.onload = runTests;
+        // Run tests automatically to display the conversion results for predefined values
+        window.onload = function() {
+            convertScoreToTime(); // Automatically convert the predefined score to time
+            convertTimeToScore(); // Automatically convert the predefined time to score
+        };
     </script>
 </body>
 </html>
