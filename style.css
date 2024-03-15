@@ -59,15 +59,9 @@ th {
     color: white;
 }
 
-/* Оформление первой колонки со временем */
-th:first-child, td:first-child {
-    background-color: #ff8c00; /* Темно-оранжевый цвет для первой колонки */
-    color: white;
-}
-
-/* Оформление заголовочной строки */
-tr:first-child th {
-    background-color: #0056b3; /* Синий цвет для заголовков */
+/* Стили для оранжевых ячеек */
+.orange-bg {
+    background-color: #ff8c00; /* Оранжевый цвет для первой колонки */
     color: white;
 }
 
