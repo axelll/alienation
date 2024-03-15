@@ -42,24 +42,24 @@ button:hover {
 }
 
 /* Стили для таблицы значений */
-.score-table {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-.score-table .header {
-    flex-basis: 24%;
-    background-color: #0056b3;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 5px; /* Отступ между заголовками и значениями */
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
 }
 
-.score-table .value {
-    flex-basis: 24%;
-    padding: 5px;
-    text-align: center;
+th {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Четные строки таблицы */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
