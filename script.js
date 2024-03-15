@@ -26,28 +26,36 @@ function displayGameInfo() {
 
 function fillValueTable() {
     const table = document.getElementById('scoreTable');
+    // Создаём строку для секунд и заголовков минут
     const headerRow = table.insertRow();
-    headerRow.insertCell().textContent = 'Seconds'; // Ячейка заголовка для секунд
+    const firstHeaderCell = headerRow.insertCell();
+    firstHeaderCell.outerHTML = "<th>Seconds</th>"; // Используем элемент th для первой ячейки
+
+    // Заполняем заголовки минут
     for (let minute = 9; minute <= 12; minute++) {
-        const headerCell = headerRow.insertCell();
+        const headerCell = document.createElement("th");
         headerCell.textContent = `${minute} minutes`;
+        headerRow.appendChild(headerCell);
     }
 
+    // Заполняем строки для каждой секунды
     for (let second = 0; second < 60; second += 10) {
         const row = table.insertRow();
-        row.insertCell().textContent = `${second} seconds`;
+        const firstCell = row.insertCell();
+        firstCell.outerHTML = `<th>${second} seconds</th>`; // Используем элемент th для первой ячейки
+
         for (let minute = 9; minute <= 12; minute++) {
             const totalSeconds = minute * 60 + second;
             const score = 2000000 - totalSeconds * 60;
             const cell = row.insertCell();
-            // Форматируем число с разделением тысяч
             cell.textContent = new Intl.NumberFormat('ru-RU').format(score);
         }
     }
 }
 
+
 function displayVersion() {
-    const version = 'v1.0.8'; // Обновленная версия
+    const version = 'v1.0.9'; // Обновленная версия
     const versionElement = document.createElement('div');
     versionElement.style.position = 'fixed';
     versionElement.style.bottom = '0';
